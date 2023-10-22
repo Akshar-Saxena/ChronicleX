@@ -1,0 +1,31 @@
+List<Map<String, String>> countries = [
+  {'value': 'in', 'label': 'India'},
+  {'value': 'ca', 'label': 'Canada'},
+  {'value': 'ar', 'label': 'Argentina'},
+  {'value': 'au', 'label': 'Australia'},
+  {'value': 'be', 'label': 'Belgium'},
+  {'value': 'br', 'label': 'Brazil'},
+  {'value': 'cn', 'label': 'China'},
+  {'value': 'fr', 'label': 'France'},
+  {'value': 'de', 'label': 'Germany'},
+  {'value': 'gr', 'label': 'Greece'},
+  {'value': 'my', 'label': 'Malaysia'},
+  {'value': 'mx', 'label': 'Mexico'},
+  {'value': 'nz', 'label': 'New Zealand'},
+  {'value': 'ru', 'label': 'Russia'},
+  {'value': 'za', 'label': 'South Africa'},
+  {'value': 'th', 'label': 'Thailand'},
+  {'value': 'gb', 'label': 'United Kingdom'},
+  {'value': 'us', 'label': 'United States'},
+];
+
+List<Map<String, String>> categories = [
+  {'value': 'all', 'label': 'All'},
+  {'value': 'sports', 'label': 'Sports'},
+  {'value': 'business', 'label': 'Business'},
+  {'value': 'entertainment', 'label': 'Entertainment'},
+  {'value': 'general', 'label': 'General'},
+  {'value': 'health', 'label': 'Health'},
+  {'value': 'science', 'label': 'Science'},
+  {'value': 'technology', 'label': 'Technology'},
+];
