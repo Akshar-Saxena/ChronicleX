@@ -1,18 +1,31 @@
-import 'package:chroniclex/loadingPage.dart';
 import 'package:flutter/material.dart';
+
 import 'package:chroniclex/const.dart';
+import 'package:chroniclex/data/data.dart';
 
 class WelcomePage extends StatefulWidget {
-  const WelcomePage({super.key});
+  const WelcomePage({Key? key}) : super(key: key);
 
   @override
   State<WelcomePage> createState() => _WelcomePageState();
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  var dropdownvaluecountry = 'in';
-  var dropdownvaluecategory = 'sports';
-  var query = '';
+  String dropdownValueCountry = 'in';
+  String dropdownValueCategory = 'sports';
+  String query = '';
+
+  void redirect() {
+    Navigator.pushNamed(
+      context,
+      '/load',
+      arguments: {
+        'q': query,
+        'country': dropdownValueCountry,
+        'category': dropdownValueCategory,
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +58,9 @@ class _WelcomePageState extends State<WelcomePage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 0.0, horizontal: 40.0),
+                      vertical: 0.0,
+                      horizontal: 40.0,
+                    ),
                     child: TextField(
                       onChanged: (value) {
                         setState(() {
@@ -85,7 +100,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         SizedBox(
                           width: 120.0,
                           child: DropdownButton(
-                            value: dropdownvaluecountry,
+                            value: dropdownValueCountry,
                             icon: const Icon(
                               Icons.arrow_downward,
                               color: Color(0xFFFF0000),
@@ -103,83 +118,15 @@ class _WelcomePageState extends State<WelcomePage> {
                               color: const Color(0xFFFF0000),
                             ),
                             alignment: Alignment.center,
-                            items: const [
-                              DropdownMenuItem(
-                                value: 'in',
-                                child: Text('India'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'ca',
-                                child: Text('Canada'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'ar',
-                                child: Text('Argentina'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'au',
-                                child: Text('Australia'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'be',
-                                child: Text('Belgium'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'br',
-                                child: Text('Brazil'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'cn',
-                                child: Text('China'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'fr',
-                                child: Text('France'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'de',
-                                child: Text('Germany'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'gr',
-                                child: Text('Greece'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'my',
-                                child: Text('Malaysia'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'mx',
-                                child: Text('Mexico'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'nz',
-                                child: Text('New Zealand'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'ru',
-                                child: Text('Russia'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'za',
-                                child: Text('South Africa'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'th',
-                                child: Text('Thailand'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'gb',
-                                child: Text('United K.'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'us',
-                                child: Text('United S.'),
-                              ),
-                            ],
+                            items: countries.map((country) {
+                              return DropdownMenuItem(
+                                value: country['value'],
+                                child: Text(country['label']!),
+                              );
+                            }).toList(),
                             onChanged: (String? value) {
                               setState(() {
-                                dropdownvaluecountry = value.toString();
+                                dropdownValueCountry = value.toString();
                               });
                             },
                           ),
@@ -187,7 +134,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         SizedBox(
                           width: 125.0,
                           child: DropdownButton(
-                            value: dropdownvaluecategory,
+                            value: dropdownValueCategory,
                             icon: const Icon(
                               Icons.arrow_downward,
                               color: Color(0xFFFF0000),
@@ -205,43 +152,15 @@ class _WelcomePageState extends State<WelcomePage> {
                               color: const Color(0xFFFF0000),
                             ),
                             alignment: Alignment.center,
-                            items: const [
-                              DropdownMenuItem(
-                                value: 'all',
-                                child: Text('All'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'sports',
-                                child: Text('Sports'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'business',
-                                child: Text('Business'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'entertainment',
-                                child: Text('Entertainment'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'general',
-                                child: Text('General'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'health',
-                                child: Text('Health'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'science',
-                                child: Text('Science'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'technology',
-                                child: Text('Technology'),
-                              ),
-                            ],
+                            items: categories.map((category) {
+                              return DropdownMenuItem(
+                                value: category['value'],
+                                child: Text(category['label']!),
+                              );
+                            }).toList(),
                             onChanged: (String? value) {
                               setState(() {
-                                dropdownvaluecategory = value.toString();
+                                dropdownValueCategory = value.toString();
                               });
                             },
                           ),
@@ -253,18 +172,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     height: 150.0,
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoadingPage(
-                            category: dropdownvaluecategory,
-                            country: dropdownvaluecountry,
-                            q: query,
-                          ),
-                        ),
-                      );
-                    },
+                    onPressed: redirect,
                     style: ButtonStyle(
                       backgroundColor:
                           const MaterialStatePropertyAll(Color(0xFFFF0000)),

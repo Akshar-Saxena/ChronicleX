@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void pushToMain() async {
     await Future.delayed(const Duration(milliseconds: 3000), () {});
     if (!context.mounted) return;
-    Navigator.pushNamed(context, '/');
+    Navigator.pushReplacementNamed(context, '/');
   }
 
   @override
