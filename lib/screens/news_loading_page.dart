@@ -8,11 +8,11 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:chroniclex/const.dart';
 
 class LoadingPage extends StatefulWidget {
-  const LoadingPage({
-    required this.country,
-    required this.category,
-    required this.q,
-    Key? key,
+  const LoadingPage(
+    this.country,
+    this.category,
+    this.q,
+    {Key? key,
   }) : super(key: key);
 
   final String country;

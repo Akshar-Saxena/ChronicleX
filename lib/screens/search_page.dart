@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:chroniclex/const.dart';
 import 'package:chroniclex/data/data.dart';
+import 'package:chroniclex/screens/news_loading_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -16,14 +17,20 @@ class _WelcomePageState extends State<WelcomePage> {
   String query = '';
 
   void redirect() {
-    Navigator.pushNamed(
+    // Navigator.pushNamed(
+    //   context,
+    //   '/load',
+    //   arguments: {
+    //     'q': query,
+    //     'country': dropdownValueCountry,
+    //     'category': dropdownValueCategory,
+    //   },
+    // );
+    Navigator.push(
       context,
-      '/load',
-      arguments: {
-        'q': query,
-        'country': dropdownValueCountry,
-        'category': dropdownValueCategory,
-      },
+      MaterialPageRoute(
+          builder: (context) => LoadingPage(
+              query, dropdownValueCountry, dropdownValueCategory)),
     );
   }
 
